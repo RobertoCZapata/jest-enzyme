@@ -3,6 +3,7 @@ import { mount, shallow } from 'enzyme';
 import ProviderMock from '../../__mocks__/ProviderMock';
 import Header from '../../components/Header';
 import { TestScheduler } from 'jest';
+import { create } from 'react-test-renderer';
 
 describe('header component test', () => {
   test('Header component render', () => {
@@ -21,5 +22,16 @@ describe('header component test', () => {
       </ProviderMock>
     );
     expect(header.find('.Header-title').text()).toEqual('Platzi Store');
+  });
+});
+
+describe('header snapshot test', () => {
+  test('testing Snapshot of Header', () => {
+    const header = create(
+      <ProviderMock>
+        <Header />
+      </ProviderMock>
+    );
+    expect(header.toJSON()).toMatchSnapshot();
   });
 });
